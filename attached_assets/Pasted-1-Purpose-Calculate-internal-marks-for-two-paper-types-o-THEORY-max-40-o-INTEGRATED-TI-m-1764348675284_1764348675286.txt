@@ -1,0 +1,104 @@
+1) Purpose
+•	Calculate internal marks for two paper types:
+o	THEORY (max 40)
+o	INTEGRATED / TI (max 50)
+•	Use the conversion rules given.
+•	After calculation, show only the final total internal mark and a progress bar.
+________________________________________
+2) App Flow
+•	On first load, show a welcome screen:
+o	Title: “Welcome To Internal Marks Calculator”
+o	Short subtitle
+o	Two large buttons: Theory and Integrated
+o	Optional small buttons: Use Sample Data and Import CSV
+•	When a type is chosen, show the corresponding input form.
+•	Include a Back button to return to the welcome screen.
+________________________________________
+3) Default Theme + Visual Style
+•	Default theme = Dark mode (with Light/Dark toggle saved in localStorage).
+•	UI must be clean, modern, mobile-first, and glassy:
+o	Frosted translucent card
+o	Backdrop blur, soft shadow
+o	Rounded 16px corners
+o	Smooth transitions (~550ms)
+o	No pre-animation flashes
+•	Larger headline, consistent spacing, readable typography, clear CTA button.
+•	Respect reduced-motion settings.
+________________________________________
+4) Layout
+•	Top: App title + theme toggle.
+•	After choosing “Theory” or “Integrated”, display:
+o	Input form
+o	A single Calculate button below inputs
+o	Results card (hidden until Calculate is clicked)
+•	Bottom sticky bar:
+o	Reset
+o	Export CSV
+o	Save Snapshot (JSON)
+o	Print
+________________________________________
+5) Inputs & Validation
+•	Inputs must accept integer values only.
+•	No spinner arrows, no decimals, no negative values.
+•	Block invalid keys and prevent wheel-scroll changing inputs.
+•	Values must never exceed the component’s maximum.
+•	If input > max → clamp to max + show a small validation message.
+•	Assignments (Theory only) default to 10 internally when left blank.
+THEORY INPUTS
+•	CIE 1 (out of 50)
+•	CIE 2 (out of 50)
+•	Assignment 1 (out of 10)
+•	Assignment 2 (out of 10)
+•	Assignment 3 (out of 10)
+•	Model Exam (out of 100)
+INTEGRATED (TI) INPUTS
+•	CIE 1 (out of 50)
+•	CIE 2 (out of 50)
+•	CIE 3 (out of 100)
+•	Practical Test 1 (out of 50)
+•	Practical Test 2 (out of 50)
+•	Practical Test 3 (out of 100)
+________________________________________
+6) Conversion Rules (Exact)
+THEORY
+•	CIE1 → max 8
+•	CIE2 → max 8
+•	Assignment1 → max 4
+•	Assignment2 → max 4
+•	Assignment3 → max 6
+•	Model → max 10
+•	Converted = (obtained / conducted) × max
+•	Final internal = sum (max 40)
+INTEGRATED (TI)
+•	CIE1 → max 7
+•	CIE2 → max 7
+•	CIE3 → max 11
+•	Practical1 → max 7
+•	Practical2 → max 7
+•	Practical3 → max 11
+•	Converted = (obtained / conducted) × max
+•	Final internal = sum (max 50)
+________________________________________
+7) Results
+•	Do NOT show per-component breakdown anywhere.
+•	After clicking Calculate:
+o	Show only a large result card with:
+	Total Internal — X/40 or X/50
+	Animated progress bar
+	Short friendly message (e.g., “Great!”, “Needs improvement”, etc.)
+	Copyable summary line
+•	Keep Export CSV, Save Snapshot (JSON), Print.
+________________________________________
+8) Accessibility & Behavior
+•	Fully keyboard accessible.
+•	Use aria-live for announcing the total after calculation.
+•	Input labels must be clear and readable.
+•	No flickers between screens or transitions.
+•	Add micro-interactions: clean hover, press scale animations, smooth reveals.
+________________________________________
+9) Deliverables
+•	A complete working web app (single page) with all rules above.
+•	Clean, polished UI with glassmorphic dark theme by default.
+•	Provide code, assets (icons), and live preview link.
+•	Include a short README explaining usage, conversion formulas, and sample inputs.
+________________________________________
