@@ -1,0 +1,110 @@
+MAIN PAGE
+
+Design a clean home screen with the title “Welcome to Markify” and 4 large buttons:
+
+Internal Score
+
+Target Sense
+
+GPA Predictor
+
+CGPA Calculator
+
+Each button opens its own tool page. Use smooth transitions and the same UI style everywhere.
+
+🔵 1. INTERNAL SCORE (THEORY / INTEGRATED)
+
+When “Internal Score” is clicked, open the internal-calculation tab I already created:
+
+Two options: Theory and Integrated.
+
+Show the exact two-column layouts I previously defined for both.
+
+Integer-only inputs, max validation, no default assignment marks.
+
+Calculate internal mark using the conversion rules already implemented.
+
+Show only final total in a separate card (no breakdown).
+
+Top-right: Reset button.
+
+(Keep all previous behavior and design as implemented.)
+
+🔵 2. TARGET SENSE (Model Mark Needed)
+
+When “Target Sense” is clicked, open a new page:
+
+Step 1 — Ask Paper Type:
+
+Theory or Integrated.
+
+Step 2 — Ask the inputs based on paper type:
+
+For Theory: CIE1, CIE2, ASS1, ASS2, ASS3, Model (to be calculated).
+
+For Integrated: CIE1, CIE2, CIE3, PRT1, PRT2, PRT3, Model (to be calculated).
+
+Step 3 — Ask the user:
+
+“Enter your Target Internal Score (out of 40 or 50 depending on paper type)”
+
+Step 4 — Output:
+Calculate and display the exact MARK NEEDED in Model Exam to reach the target internal score.
+
+If the required model mark is >100 or <0, show a message like “Impossible target” or “Target already achieved.”
+
+🔵 3. GPA PREDICTOR
+
+When “GPA Predictor” is clicked, open a new page:
+
+Step 1: Ask total number of papers.
+
+Step 2: For each paper, show these fields:
+
+Paper Type (Theory/Integrated)
+
+Credits
+
+Internal Score (out of 40 or 50 based on type)
+
+Expected Semester Mark (out of 100)
+
+Step 3 — Calculation:
+
+Convert semester mark to 60 or 50 depending on scheme.
+
+Total = Internal (40/50) + External (converted 60/50).
+
+Determine grade → grade point → multiply by credits.
+
+Predict GPA = total grade points ÷ total credits.
+
+Show final GPA with a summary.
+
+🔵 4. CGPA CALCULATOR
+
+When “CGPA Calculator” is clicked, open a new page:
+
+Step 1: Ask number of semesters completed.
+Step 2: Ask GPA for each semester.
+Step 3: Output CGPA using the standard weighted formula.
+
+🟣 UI REQUIREMENTS
+
+Default theme: Dark, with toggle.
+
+Use glassmorphism (blur, soft shadows, rounded corners).
+
+Mobile-friendly, clean, centered layout.
+
+Smooth animations, no layout jumps.
+
+Top bar with Back + Reset (only inside tool pages).
+
+No sample button anywhere.
+
+No autosave; leaving a page resets its inputs.
+
+🟢 DELIVERABLE
+
+Create the full multi-tool app with all 4 tabs and working calculations exactly as described.
