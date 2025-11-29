@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ChevronLeft, Sparkles } from 'lucide-react';
+import { ArrowRight, ChevronLeft } from 'lucide-react';
 import { CustomInput } from '@/components/ui/custom-input';
 import { Button } from '@/components/ui/button';
 import { ResultCard } from '@/components/ResultCard';
@@ -17,11 +17,9 @@ import {
 
 type FormType = 'welcome' | 'theory' | 'integrated';
 
-// Default values - Assignments default to 10 (represented as 10 in state for clarity to user, 
-// but if they clear it, it becomes undefined, which calculator treats as 10 too).
-// Actually, to show "10" initially, we set it to 10.
+// Default values - Undefined for empty
 const defaultTheory: TheoryMarks = {
-  cie1: undefined, cie2: undefined, assignment1: 10, assignment2: 10, assignment3: 10, model: undefined
+  cie1: undefined, cie2: undefined, assignment1: undefined, assignment2: undefined, assignment3: undefined, model: undefined
 };
 
 const defaultIntegrated: IntegratedMarks = {
@@ -35,9 +33,13 @@ export const Calculator = () => {
   const [result, setResult] = useState<CalculationResult | null>(null);
   const { toast } = useToast();
 
-  // Reset result when changing views
+  // Reset result and form data when changing views (Reset on Exit)
   useEffect(() => {
     setResult(null);
+    if (view === 'welcome') {
+      setTheoryData(defaultTheory);
+      setIntegratedData(defaultIntegrated);
+    }
   }, [view]);
 
   const handleCalculate = () => {
@@ -66,70 +68,11 @@ export const Calculator = () => {
     setTheoryData(defaultTheory);
     setIntegratedData(defaultIntegrated);
     setResult(null);
-    toast({ title: "Form Reset", description: "All fields have been cleared to defaults." });
-  };
-
-  const handleExport = () => {
-    const data = view === 'theory' ? theoryData : integratedData;
-    // Handle undefined in CSV export - replace with 0 or blank
-    const keys = Object.keys(data);
-    const values = Object.values(data).map(v => v ?? '');
-    
-    const csvContent = "data:text/csv;charset=utf-8," 
-      + keys.join(",") + "\n" 
-      + values.join(",");
-    
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "internal_marks.csv");
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    toast({ title: "Exported", description: "CSV file downloaded successfully." });
-  };
-
-  const handleSave = () => {
-    const data = {
-      type: view,
-      timestamp: new Date().toISOString(),
-      marks: view === 'theory' ? theoryData : integratedData,
-      result: result
-    };
-    
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "internal_marks_snapshot.json";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    toast({ title: "Saved", description: "Snapshot saved as JSON." });
-  };
-
-  const handlePrint = () => {
-    window.print();
-  };
-
-  // Load Sample Data
-  const loadSample = () => {
-    if (view === 'theory') {
-      setTheoryData({
-        cie1: 45, cie2: 42, assignment1: 9, assignment2: 10, assignment3: 8, model: 85
-      });
-    } else if (view === 'integrated') {
-      setIntegratedData({
-        cie1: 40, cie2: 38, cie3: 90, practical1: 45, practical2: 48, practical3: 95
-      });
-    }
-    toast({ title: "Sample Data Loaded" });
+    toast({ title: "Form Reset", description: "All fields have been cleared." });
   };
 
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div className="w-full max-w-md mx-auto pb-24">
       <AnimatePresence mode="wait">
         {view === 'welcome' && (
           <motion.div 
@@ -176,10 +119,6 @@ export const Calculator = () => {
                 </div>
               </button>
             </div>
-
-            <div className="pt-4">
-               {/* Optional buttons as text links or small ghost buttons */}
-            </div>
           </motion.div>
         )}
 
@@ -200,16 +139,13 @@ export const Calculator = () => {
               >
                 <ChevronLeft className="mr-1" /> Back
               </Button>
-              
-              <Button variant="ghost" size="sm" onClick={loadSample} className="text-xs text-muted-foreground hover:text-primary">
-                <Sparkles size={14} className="mr-1" /> Use Sample
-              </Button>
             </div>
 
             <div className="space-y-4">
               {view === 'theory' ? (
-                <div className="grid gap-4">
-                  <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Left Column */}
+                  <div className="space-y-4 order-1">
                     <CustomInput 
                       label="CIE 1" 
                       max={50} 
@@ -222,37 +158,40 @@ export const Calculator = () => {
                       value={theoryData.cie2 ?? ''} 
                       onChange={(e) => setTheoryData({...theoryData, cie2: safeParse(e.target.value)})} 
                     />
-                  </div>
-                  <div className="grid grid-cols-3 gap-4">
                     <CustomInput 
-                      label="Assign 1" 
+                      label="MODEL" 
+                      max={100} 
+                      value={theoryData.model ?? ''} 
+                      onChange={(e) => setTheoryData({...theoryData, model: safeParse(e.target.value)})} 
+                    />
+                  </div>
+                  
+                  {/* Right Column */}
+                  <div className="space-y-4 order-2">
+                    <CustomInput 
+                      label="ASS 1" 
                       max={10} 
                       value={theoryData.assignment1 ?? ''} 
                       onChange={(e) => setTheoryData({...theoryData, assignment1: safeParse(e.target.value)})} 
                     />
                     <CustomInput 
-                      label="Assign 2" 
+                      label="ASS 2" 
                       max={10} 
                       value={theoryData.assignment2 ?? ''} 
                       onChange={(e) => setTheoryData({...theoryData, assignment2: safeParse(e.target.value)})} 
                     />
                     <CustomInput 
-                      label="Assign 3" 
+                      label="ASS 3" 
                       max={10} 
                       value={theoryData.assignment3 ?? ''} 
                       onChange={(e) => setTheoryData({...theoryData, assignment3: safeParse(e.target.value)})} 
                     />
                   </div>
-                  <CustomInput 
-                    label="Model Exam" 
-                    max={100} 
-                    value={theoryData.model ?? ''} 
-                    onChange={(e) => setTheoryData({...theoryData, model: safeParse(e.target.value)})} 
-                  />
                 </div>
               ) : (
-                <div className="grid gap-4">
-                  <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Left Column */}
+                  <div className="space-y-4 order-1">
                     <CustomInput 
                       label="CIE 1" 
                       max={50} 
@@ -265,55 +204,53 @@ export const Calculator = () => {
                       value={integratedData.cie2 ?? ''} 
                       onChange={(e) => setIntegratedData({...integratedData, cie2: safeParse(e.target.value)})} 
                     />
-                  </div>
-                  <CustomInput 
-                      label="CIE 3" 
+                    <CustomInput 
+                      label="MODEL / CIE 3" 
                       max={100} 
                       value={integratedData.cie3 ?? ''} 
                       onChange={(e) => setIntegratedData({...integratedData, cie3: safeParse(e.target.value)})} 
                     />
-                  <div className="grid grid-cols-2 gap-4">
+                  </div>
+                  
+                  {/* Right Column */}
+                  <div className="space-y-4 order-2">
                     <CustomInput 
-                      label="Prac 1" 
+                      label="PRT 1" 
                       max={50} 
                       value={integratedData.practical1 ?? ''} 
                       onChange={(e) => setIntegratedData({...integratedData, practical1: safeParse(e.target.value)})} 
                     />
                     <CustomInput 
-                      label="Prac 2" 
+                      label="PRT 2" 
                       max={50} 
                       value={integratedData.practical2 ?? ''} 
                       onChange={(e) => setIntegratedData({...integratedData, practical2: safeParse(e.target.value)})} 
                     />
-                  </div>
-                  <CustomInput 
-                      label="Prac 3" 
+                    <CustomInput 
+                      label="PRT 3" 
                       max={100} 
                       value={integratedData.practical3 ?? ''} 
                       onChange={(e) => setIntegratedData({...integratedData, practical3: safeParse(e.target.value)})} 
                     />
+                  </div>
                 </div>
               )}
 
               <Button 
-                className="w-full glass-button h-14 text-lg font-bold mt-6 rounded-xl"
+                className="w-full glass-button h-14 text-lg font-bold mt-6 rounded-xl mb-0"
                 onClick={handleCalculate}
               >
                 Calculate Internal Marks
               </Button>
             </div>
 
-            {result && <ResultCard result={result} />}
+            {result && (
+               <div className="mt-4">
+                  <ResultCard result={result} />
+               </div>
+            )}
             
-            {/* Spacer for sticky bar */}
-            <div className="h-20" />
-            
-            <StickyBar 
-              onReset={handleReset} 
-              onExport={handleExport} 
-              onSave={handleSave} 
-              onPrint={handlePrint} 
-            />
+            <StickyBar onReset={handleReset} />
           </motion.div>
         )}
       </AnimatePresence>

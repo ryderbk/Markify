@@ -36,19 +36,19 @@ export const calculateTheory = (marks: TheoryMarks): CalculationResult => {
   // Conversion Rules:
   // CIE1 (50) -> 8
   // CIE2 (50) -> 8
-  // Ass1 (10) -> 4  (Defaults to 10 if undefined)
-  // Ass2 (10) -> 4  (Defaults to 10 if undefined)
-  // Ass3 (10) -> 6  (Defaults to 10 if undefined)
+  // Ass1 (10) -> 4  (Defaults to 0 if undefined)
+  // Ass2 (10) -> 4  (Defaults to 0 if undefined)
+  // Ass3 (10) -> 6  (Defaults to 0 if undefined)
   // Model (100) -> 10
   // Total Max: 40
 
   const c1 = ((marks.cie1 ?? 0) / 50) * 8;
   const c2 = ((marks.cie2 ?? 0) / 50) * 8;
   
-  // Assignments default to 10 if undefined (blank)
-  const a1Val = marks.assignment1 ?? 10;
-  const a2Val = marks.assignment2 ?? 10;
-  const a3Val = marks.assignment3 ?? 10;
+  // Assignments default to 0 if undefined (blank)
+  const a1Val = marks.assignment1 ?? 0;
+  const a2Val = marks.assignment2 ?? 0;
+  const a3Val = marks.assignment3 ?? 0;
 
   const a1 = (a1Val / 10) * 4;
   const a2 = (a2Val / 10) * 4;

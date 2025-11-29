@@ -26,7 +26,7 @@ export const ResultCard = ({ result }: ResultCardProps) => {
       initial={{ opacity: 0, scale: 0.9, y: 20 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ type: "spring", duration: 0.6 }}
-      className="glass-card rounded-2xl p-6 md:p-8 text-center space-y-6 mt-6 relative overflow-hidden group"
+      className="glass-card rounded-2xl p-6 md:p-8 text-center space-y-6 relative overflow-hidden group"
     >
       {/* Background glow effect */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-primary/20 blur-[80px] rounded-full pointer-events-none group-hover:bg-primary/30 transition-colors duration-700" />
