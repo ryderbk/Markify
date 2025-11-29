@@ -117,8 +117,8 @@ export const GPAPredictor = () => {
                       position="popper" 
                       sideOffset={8}
                     >
-                      <SelectItem value="theory" className="text-base font-medium py-2 px-4 rounded-lg cursor-pointer hover:bg-primary/10 focus:outline-none transition-colors duration-200">Theory (Max 40)</SelectItem>
-                      <SelectItem value="integrated" className="text-base font-medium py-2 px-4 rounded-lg cursor-pointer hover:bg-primary/10 focus:outline-none transition-colors duration-200">Integrated (Max 50)</SelectItem>
+                      <SelectItem value="theory" className="text-base font-medium py-2 px-4 rounded-lg cursor-pointer hover:bg-primary/10 focus:outline-none transition-colors duration-200 !bg-transparent data-[state=checked]:!bg-transparent">Theory (Max 40)</SelectItem>
+                      <SelectItem value="integrated" className="text-base font-medium py-2 px-4 rounded-lg cursor-pointer hover:bg-primary/10 focus:outline-none transition-colors duration-200 !bg-transparent data-[state=checked]:!bg-transparent">Integrated (Max 50)</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
