@@ -66,7 +66,7 @@ export const CustomInput = ({ label, max, value, onChange, className, ...props }
           onWheel={(e) => e.currentTarget.blur()} // Prevent scroll changing
           className={cn(
             "w-full h-14 px-5 rounded-2xl bg-white/40 dark:bg-black/20 border border-white/50 dark:border-white/10",
-            "text-xl font-semibold text-foreground placeholder:text-muted-foreground/40",
+            "text-base font-medium text-foreground placeholder:text-muted-foreground/40",
             "focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary/50",
             "transition-all duration-300 backdrop-blur-md shadow-sm",
             error && "border-destructive/50 focus:ring-destructive/20"
