@@ -109,16 +109,16 @@ export const GPAPredictor = () => {
                 <div className="col-span-2 sm:col-span-1 relative group space-y-1.5">
                   <label className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors duration-300">Type</label>
                   <Select value={paper.type} onValueChange={(v) => updatePaper(paper.id, 'type', v)}>
-                    <SelectTrigger className="w-full h-14 px-5 rounded-2xl bg-white/40 dark:bg-black/20 border border-white/50 dark:border-white/10 backdrop-blur-md shadow-sm text-xl font-semibold focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary/50 transition-all duration-300">
-                      <SelectValue />
+                    <SelectTrigger className="w-full h-14 px-5 rounded-2xl bg-white/40 dark:bg-black/20 border border-white/50 dark:border-white/10 backdrop-blur-md shadow-sm text-base font-medium text-foreground focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary/50 transition-all duration-300 inline-flex items-center justify-between leading-[1.4]">
+                      <SelectValue placeholder="Select type" className="text-base font-medium" />
                     </SelectTrigger>
                     <SelectContent 
-                      className="w-[var(--radix-select-trigger-width)] min-w-full bg-white/40 dark:bg-black/20 backdrop-blur-md border border-white/50 dark:border-white/10 rounded-2xl shadow-sm z-50" 
+                      className="w-[var(--radix-select-trigger-width)] min-w-full bg-white/40 dark:bg-black/20 backdrop-blur-md border border-white/50 dark:border-white/10 rounded-2xl shadow-sm z-50 p-1" 
                       position="popper" 
                       sideOffset={8}
                     >
-                      <SelectItem value="theory" className="text-xl font-semibold py-2.5 px-5 focus:bg-primary/10 focus:text-primary cursor-pointer">Theory (Max 40)</SelectItem>
-                      <SelectItem value="integrated" className="text-xl font-semibold py-2.5 px-5 focus:bg-primary/10 focus:text-primary cursor-pointer">Integrated (Max 50)</SelectItem>
+                      <SelectItem value="theory" className="text-base font-medium py-2 px-4 focus:bg-primary/10 focus:text-primary cursor-pointer">Theory (Max 40)</SelectItem>
+                      <SelectItem value="integrated" className="text-base font-medium py-2 px-4 focus:bg-primary/10 focus:text-primary cursor-pointer">Integrated (Max 50)</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
