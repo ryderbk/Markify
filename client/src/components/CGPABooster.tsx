@@ -21,6 +21,7 @@ export const CGPABooster = () => {
   const [message, setMessage] = useState<string | null>(null);
 
   const addSemester = () => {
+    if (completedSemesters.length >= 8) return;
     setCompletedSemesters([...completedSemesters, { id: Date.now().toString(), gpa: undefined }]);
   };
 
@@ -35,14 +36,21 @@ export const CGPABooster = () => {
   };
 
   const calculateRequiredGPA = () => {
-    if (!targetCGPA || !remainingSemesters) return;
+    if (!targetCGPA) return;
 
     // Formula:
     // Required GPA = (Target CGPA * Total Semesters - Sum of Completed GPAs) / Remaining Semesters
     
     const numCompleted = completedSemesters.length;
-    const numRemaining = remainingSemesters;
-    const totalSemesters = numCompleted + numRemaining;
+    const numRemaining = 8 - numCompleted;
+    
+    if (numRemaining <= 0) {
+      setRequiredGPA("Completed");
+      setMessage("You have already completed all semesters.");
+      return;
+    }
+    
+    const totalSemesters = 8;
     
     const sumCompletedGPA = completedSemesters.reduce((acc, curr) => acc + (curr.gpa || 0), 0);
     
@@ -70,7 +78,6 @@ export const CGPABooster = () => {
   const handleReset = () => {
     setTargetCGPA(undefined);
     setCompletedSemesters([{ id: '1', gpa: undefined }]);
-    setRemainingSemesters(undefined);
     setRequiredGPA(null);
     setMessage(null);
   };
@@ -118,25 +125,20 @@ export const CGPABooster = () => {
               </div>
             ))}
           </div>
-          <Button variant="outline" onClick={addSemester} className="w-full border-dashed border-primary/30 hover:border-primary/60 hover:bg-primary/5 text-primary h-12 rounded-xl">
-            <Plus size={16} className="mr-2" /> Add Semester
+          <Button 
+            variant="outline" 
+            onClick={addSemester} 
+            disabled={completedSemesters.length >= 8}
+            className="w-full border-dashed border-primary/30 hover:border-primary/60 hover:bg-primary/5 text-primary h-12 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <Plus size={16} className="mr-2" /> {completedSemesters.length >= 8 ? "Maximum is 8 semesters" : "Add Semester"}
           </Button>
-        </div>
-
-        {/* Step 3: Remaining Semesters */}
-        <div className="glass-panel p-6 space-y-4">
-          <h3 className="font-bold text-lg">Upcoming</h3>
-          <CustomInput 
-            label="Number of Remaining Semesters" 
-            max={10} 
-            value={remainingSemesters ?? ''} 
-            onChange={(e) => setRemainingSemesters(safeParse(e.target.value))} 
-          />
         </div>
 
         <Button 
           className="w-full glass-button h-14 text-lg font-bold rounded-2xl"
           onClick={calculateRequiredGPA}
+          disabled={completedSemesters.length >= 8}
         >
           Calculate Required GPA
         </Button>

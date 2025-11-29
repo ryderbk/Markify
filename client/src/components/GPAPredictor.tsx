@@ -106,15 +106,19 @@ export const GPAPredictor = () => {
               </div>
               
               <div className="grid grid-cols-2 gap-4">
-                <div className="col-span-2 sm:col-span-1">
+                <div className="col-span-2 sm:col-span-1 relative">
                   <label className="text-xs font-medium text-muted-foreground mb-1 block">Type</label>
                   <Select value={paper.type} onValueChange={(v) => updatePaper(paper.id, 'type', v)}>
                     <SelectTrigger className="w-full h-14 px-5 rounded-2xl bg-white/40 dark:bg-black/20 border border-white/50 dark:border-white/10 backdrop-blur-md shadow-sm text-xl font-semibold focus:ring-4 focus:ring-primary/10 focus:border-primary/50 transition-all duration-300">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent className="bg-white/80 dark:bg-black/80 backdrop-blur-xl border-white/20 rounded-xl">
-                      <SelectItem value="theory" className="text-lg py-3 focus:bg-primary/10 focus:text-primary rounded-lg cursor-pointer">Theory (Max 40)</SelectItem>
-                      <SelectItem value="integrated" className="text-lg py-3 focus:bg-primary/10 focus:text-primary rounded-lg cursor-pointer">Integrated (Max 50)</SelectItem>
+                    <SelectContent 
+                      className="w-[var(--radix-select-trigger-width)] min-w-full bg-white/80 dark:bg-black/80 backdrop-blur-xl border-white/20 dark:border-white/10 rounded-xl shadow-xl p-1 z-50" 
+                      position="popper" 
+                      sideOffset={4}
+                    >
+                      <SelectItem value="theory" className="text-lg py-3 px-4 focus:bg-primary/10 focus:text-primary rounded-lg cursor-pointer">Theory (Max 40)</SelectItem>
+                      <SelectItem value="integrated" className="text-lg py-3 px-4 focus:bg-primary/10 focus:text-primary rounded-lg cursor-pointer">Integrated (Max 50)</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>

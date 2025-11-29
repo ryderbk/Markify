@@ -1,0 +1,70 @@
+Update the CGPA Calculator and CGPA Booster pages:
+
+1) Limit Semesters to 8:
+- The “Add Semester” button must stop working once the total reaches 8.
+- Hide or disable the button when 8 semesters are shown.
+- Do not allow more than 8 GPA inputs to be created.
+- If the user tries to exceed 8, show a small message: “Maximum is 8 semesters”.
+
+2) Allow Decimal GPA Input:
+- GPA inputs must accept decimal values (e.g., 7.8, 8.25, 9.0).
+- Remove restrictions blocking the decimal point.
+- Allow only valid GPA numbers from 0.0 to 10.0.
+- Still block letters, symbols, or invalid characters.
+
+Keep all other UI, layout, and behavior exactly the same.
+
+Update all input labels in Internal Score:
+
+1) Change every “ASS” label to “Assign”
+   (ASS 1 → Assign 1, ASS 2 → Assign 2, ASS 3 → Assign 3)
+
+2) Change every “PRT” label to “Pract”
+   (PRT 1 → Pract 1, PRT 2 → Pract 2, PRT 3 → Pract 3)
+
+3) Change “MODEL” to “Model”
+   (Model stays with Max: 100)
+
+Apply these changes to both Theory and Integrated layouts.  
+Do not change spacing, layout, max values, or styling—only rename the labels.
+
+Fix the Type dropdown in GPA Predictor so it uses the app's standard select component and styling:
+
+- Replace any native or different-select variant with the app's standard rounded pill select used elsewhere.
+- Dropdown button and menu must share the same padding, height, font-size, border-radius, background, and text color as other selects.
+- Menu width should match the trigger width (no oversized popup). Align the popup under the trigger.
+- Use the same caret icon and selected-option check mark as other selects.
+- Ensure the open menu has the same glassy background, soft shadow, and rounded corners; option hover + active states must match the app.
+- Fix z-index so the menu appears above content without clipping.
+- Remove inconsistent large padding / different fonts in the menu items.
+- Keep option text exactly: "Theory (Max 40)" and "Integrated (Max 50)".
+- No functional changes—only visual/styling consistency.
+
+Apply only to GPA Predictor page.
+
+In the CGPA Booster page:
+
+1) Remove the “Number of Remaining Semesters” input completely.  
+   It is not needed because there are always 8 total semesters.
+
+2) New logic:
+   Remaining Semesters = 8 − (Number of Completed Semesters entered)
+
+3) Automatically compute remaining semesters in the background without showing a field.
+
+4) If the user enters 8 completed semesters:
+   - Show a message: “You have already completed all semesters.”
+   - Do not calculate required GPA.
+
+5) If the remaining semesters = 0 or negative, disable calculation.
+
+6) Keep all other UI and behavior the same (target CGPA input, GPA list, result card).
+
+Update the CGPA Calculator card on the main page:
+
+- Replace the graduation cap icon with a clean book icon.
+- Use the same style, size, color intensity, and container shape as the other icons.
+- Keep the card title “CGPA Calculator” and the subtitle the same.
+- Do not change the layout, spacing, or colors of the other cards.
+
+Only update the icon to a book icon that visually matches the rest of the UI.

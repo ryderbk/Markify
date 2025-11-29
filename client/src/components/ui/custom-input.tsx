@@ -25,24 +25,19 @@ export const CustomInput = ({ label, max, value, onChange, className, ...props }
       return;
     }
 
-    // Integer only check
-    if (!/^\d+$/.test(val)) {
-      return; // Ignore non-digits
+    // Allow decimal values for GPA (0.0 to 10.0)
+    // Regex: allows digits, optional decimal point, optional digits after decimal
+    if (!/^\d*\.?\d*$/.test(val)) {
+      return; 
     }
 
-    const numVal = parseInt(val, 10);
+    const numVal = parseFloat(val);
 
     if (numVal > max) {
       setError(`Max value is ${max}`);
-      // Optional: Clamp immediately or let them type but show error?
-      // Requirements: "If input > max -> clamp to max + show a small validation message."
-      // So we clamp it in the event sent to parent, but maybe show the clamped value?
-      
-      // Let's trigger the change with the max value
+      // Trigger change with max value
       e.target.value = max.toString();
       onChange(e);
-      
-      // Clear error after 2 seconds
       setTimeout(() => setError(null), 2000);
     } else {
       setError(null);

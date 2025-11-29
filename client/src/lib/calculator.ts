@@ -28,7 +28,7 @@ export type CalculationResult = {
 export const safeParse = (val: string | number): number | undefined => {
   if (typeof val === 'number') return val;
   if (val === '' || val === undefined || val === null) return undefined;
-  const parsed = parseInt(val, 10);
+  const parsed = parseFloat(val); // Changed from parseInt to parseFloat to support decimal GPA
   return isNaN(parsed) ? undefined : parsed;
 };
 

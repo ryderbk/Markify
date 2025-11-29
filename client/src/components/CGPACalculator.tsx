@@ -19,6 +19,7 @@ export const CGPACalculator = () => {
   const [cgpa, setCgpa] = useState<string | null>(null);
 
   const addSemester = () => {
+    if (semesters.length >= 8) return;
     setSemesters([...semesters, { id: Date.now().toString(), gpa: undefined, credits: undefined }]);
   };
 
@@ -112,8 +113,13 @@ export const CGPACalculator = () => {
           ))}
         </div>
 
-        <Button variant="outline" onClick={addSemester} className="w-full border-dashed border-white/20 hover:border-primary">
-          <Plus size={16} className="mr-2" /> Add Semester
+        <Button 
+          variant="outline" 
+          onClick={addSemester} 
+          disabled={semesters.length >= 8}
+          className="w-full border-dashed border-white/20 hover:border-primary disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <Plus size={16} className="mr-2" /> {semesters.length >= 8 ? "Maximum is 8 semesters" : "Add Semester"}
         </Button>
 
         <Button className="w-full glass-button h-14 text-lg font-bold rounded-xl" onClick={calculateCGPA}>

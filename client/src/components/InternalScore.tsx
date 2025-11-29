@@ -139,7 +139,7 @@ export const InternalScore = () => {
                 onChange={(e) => setTheoryData({...theoryData, cie2: safeParse(e.target.value)})} 
               />
               <CustomInput 
-                label="MODEL" 
+                label="Model" 
                 max={100} 
                 value={theoryData.model ?? ''} 
                 onChange={(e) => setTheoryData({...theoryData, model: safeParse(e.target.value)})} 
@@ -147,19 +147,19 @@ export const InternalScore = () => {
             </div>
             <div className="space-y-4 order-2">
               <CustomInput 
-                label="ASS 1" 
+                label="Assign 1" 
                 max={10} 
                 value={theoryData.assignment1 ?? ''} 
                 onChange={(e) => setTheoryData({...theoryData, assignment1: safeParse(e.target.value)})} 
               />
               <CustomInput 
-                label="ASS 2" 
+                label="Assign 2" 
                 max={10} 
                 value={theoryData.assignment2 ?? ''} 
                 onChange={(e) => setTheoryData({...theoryData, assignment2: safeParse(e.target.value)})} 
               />
               <CustomInput 
-                label="ASS 3" 
+                label="Assign 3" 
                 max={10} 
                 value={theoryData.assignment3 ?? ''} 
                 onChange={(e) => setTheoryData({...theoryData, assignment3: safeParse(e.target.value)})} 
@@ -182,7 +182,7 @@ export const InternalScore = () => {
                 onChange={(e) => setIntegratedData({...integratedData, cie2: safeParse(e.target.value)})} 
               />
               <CustomInput 
-                label="MODEL" 
+                label="Model" 
                 max={100} 
                 value={integratedData.cie3 ?? ''} 
                 onChange={(e) => setIntegratedData({...integratedData, cie3: safeParse(e.target.value)})} 
@@ -190,19 +190,19 @@ export const InternalScore = () => {
             </div>
             <div className="space-y-4 order-2">
               <CustomInput 
-                label="PRT 1" 
+                label="Pract 1" 
                 max={50} 
                 value={integratedData.practical1 ?? ''} 
                 onChange={(e) => setIntegratedData({...integratedData, practical1: safeParse(e.target.value)})} 
               />
               <CustomInput 
-                label="PRT 2" 
+                label="Pract 2" 
                 max={50} 
                 value={integratedData.practical2 ?? ''} 
                 onChange={(e) => setIntegratedData({...integratedData, practical2: safeParse(e.target.value)})} 
               />
               <CustomInput 
-                label="PRT 3" 
+                label="Pract 3" 
                 max={100} 
                 value={integratedData.practical3 ?? ''} 
                 onChange={(e) => setIntegratedData({...integratedData, practical3: safeParse(e.target.value)})} 
