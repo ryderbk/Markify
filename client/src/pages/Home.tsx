@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'wouter';
 import { motion } from 'framer-motion';
-import { Calculator, Target, Book, TrendingUp, Rocket } from 'lucide-react';
+import { Calculator, Target, BarChart3, TrendingUp, Rocket } from 'lucide-react';
 
 const menuItems = [
   {
@@ -28,7 +28,7 @@ const menuItems = [
   {
     title: "CGPA Calculator",
     description: "Calculate cumulative grade points",
-    icon: Book,
+    icon: BarChart3,
     href: "/cgpa",
     color: "from-orange-500 to-red-500"
   },
