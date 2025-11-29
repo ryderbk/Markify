@@ -9,6 +9,7 @@ import { InternalScore } from "@/components/InternalScore";
 import { TargetSense } from "@/components/TargetSense";
 import { GPAPredictor } from "@/components/GPAPredictor";
 import { CGPACalculator } from "@/components/CGPACalculator";
+import { CGPABooster } from "@/components/CGPABooster";
 import { Layout } from "@/components/Layout";
 import { ThemeProvider } from "next-themes";
 
@@ -21,6 +22,7 @@ function Router() {
         <Route path="/target" component={TargetSense} />
         <Route path="/gpa" component={GPAPredictor} />
         <Route path="/cgpa" component={CGPACalculator} />
+        <Route path="/booster" component={CGPABooster} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

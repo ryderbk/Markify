@@ -182,7 +182,7 @@ export const InternalScore = () => {
                 onChange={(e) => setIntegratedData({...integratedData, cie2: safeParse(e.target.value)})} 
               />
               <CustomInput 
-                label="MODEL / CIE 3" 
+                label="MODEL" 
                 max={100} 
                 value={integratedData.cie3 ?? ''} 
                 onChange={(e) => setIntegratedData({...integratedData, cie3: safeParse(e.target.value)})} 

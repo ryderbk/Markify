@@ -1,0 +1,64 @@
+Add a new main-page button named “CGPA Booster”.
+When clicked, open a new page with this flow:
+________________________________________
+1) Ask Target Final CGPA
+Input: Target CGPA (0–10)
+________________________________________
+2) Ask Current Academic Details
+Inputs:
+•	Number of semesters completed
+•	For each completed semester → Enter GPA
+________________________________________
+3) Ask Upcoming Semesters
+Input:
+•	Number of remaining semesters
+________________________________________
+4) Calculate the Required GPA
+Use this formula:
+CGPA Formula
+Final CGPA = (Sum of completed GPAs + Sum of upcoming GPAs) / Total semesters
+To find the GPA needed each upcoming semester:
+Required GPA = 
+(Target CGPA × Total Semesters – Sum of Completed GPAs) / Remaining Semesters
+If the Required GPA is:
+•	> 10 → show “Impossible target”
+•	< 0 → show “Target already achieved”
+•	Otherwise → display the required GPA rounded to 2 decimals.
+________________________________________
+5) Output
+Show the result in a separate result card:
+•	Header: “Required GPA”
+•	Big number (e.g., “8.33 per semester required”)
+•	Short message (Motivation or warning)
+•	Back button + Reset button
+________________________________________
+
+CORRECTIONS:
+In the Integrated tab, change the label “MODEL / CIE 3” to simply “MODEL”.
+
+Do not change the max value (still 100).  
+Do not change layout, spacing, or styling.  
+Only update the label text from “MODEL / CIE 3” → “MODEL”.
+
+
+In the Target Sense page, change the label “Target Internal (/40)” to simply “Target Internal”.
+
+Do the same for Integrated: remove “(/50)” and show only “Target Internal”.
+
+Keep the Max value on the right side (Max: 40 or Max: 50).  
+Do not change layout, spacing, or styling—only update the label text.
+
+In the GPA Predictor page:
+
+1) Update the Type dropdown UI to match the style used in the rest of the app
+(rounded pill style with clean dark-glass design).  
+The options must appear exactly as:
+- “Theory (Max 40)”
+- “Integrated (Max 50)”
+Use the same styling as all other select components.
+
+2) Change the Internal label:
+Replace “Internal (/40)” or “Internal (/50)” with simply “Internal”.
+Keep the Max value on the right as “Max: 40” or “Max: 50”.
+
+

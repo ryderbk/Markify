@@ -150,7 +150,7 @@ export const TargetSense = () => {
         <div className="glass-panel p-6 rounded-xl space-y-4">
           <h3 className="font-bold text-lg">2. Set Target</h3>
           <CustomInput 
-            label={`Target Internal (${mode === 'theory' ? '/40' : '/50'})`} 
+            label="Target Internal" 
             max={mode === 'theory' ? 40 : 50} 
             value={target ?? ''} 
             onChange={(e) => setTarget(safeParse(e.target.value))} 

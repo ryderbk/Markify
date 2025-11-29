@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'wouter';
 import { motion } from 'framer-motion';
-import { Calculator, Target, GraduationCap, TrendingUp } from 'lucide-react';
+import { Calculator, Target, GraduationCap, TrendingUp, Rocket } from 'lucide-react';
 
 const menuItems = [
   {
@@ -31,6 +31,13 @@ const menuItems = [
     icon: GraduationCap,
     href: "/cgpa",
     color: "from-orange-500 to-red-500"
+  },
+  {
+    title: "CGPA Booster",
+    description: "Plan required GPA for target CGPA",
+    icon: Rocket,
+    href: "/booster",
+    color: "from-pink-500 to-rose-500"
   }
 ];
 
