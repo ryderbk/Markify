@@ -57,8 +57,7 @@ export const CustomInput = ({ label, max, value, onChange, className, ...props }
       <div className="relative">
         <input
           type="text"
-          inputMode="numeric"
-          pattern="[0-9]*"
+          inputMode="decimal"
           value={value}
           onChange={handleChange}
           onFocus={() => setIsFocused(true)}
