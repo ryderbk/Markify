@@ -74,7 +74,7 @@ export const InternalScore = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative z-10 flex justify-between items-center">
                   <div>
-                    <h3 className="text-xl font-bold font-display">Integrated / TI</h3>
+                    <h3 className="text-xl font-bold font-display">Integrated</h3>
                     <p className="text-sm text-muted-foreground mt-1">Max Internal: 50</p>
                   </div>
                   <ArrowRight className="opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-300 text-blue-500" />
