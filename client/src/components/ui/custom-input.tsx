@@ -25,13 +25,25 @@ export const CustomInput = ({ label, max, value, onChange, className, ...props }
       return;
     }
 
-    // Allow decimal values for GPA (0.0 to 10.0)
-    // Regex: allows digits, optional decimal point, optional digits after decimal
-    if (!/^\d*\.?\d*$/.test(val)) {
+    // Allow decimal values: digits with optional decimal point
+    // Match: "5", "5.", ".5", "5.5", "10.25", etc.
+    if (!/^[0-9]*\.?[0-9]*$/.test(val)) {
       return; 
     }
 
+    // If only a decimal point, allow it for easier typing
+    if (val === '.') {
+      onChange(e);
+      return;
+    }
+
     const numVal = parseFloat(val);
+
+    // Skip validation if user is still typing (e.g., "8." before entering "8.5")
+    if (isNaN(numVal)) {
+      onChange(e);
+      return;
+    }
 
     if (numVal > max) {
       setError(`Max value is ${max}`);
