@@ -113,12 +113,12 @@ export const GPAPredictor = () => {
                       <SelectValue placeholder="Select type" className="text-base font-medium text-foreground" />
                     </SelectTrigger>
                     <SelectContent 
-                      className="w-[var(--radix-select-trigger-width)] min-w-full bg-white dark:bg-slate-950 border border-gray-200 dark:border-white/10 rounded-2xl shadow-md z-50 p-1" 
+                      className="w-[var(--radix-select-trigger-width)] min-w-full rounded-2xl shadow-md z-50 p-1" 
                       position="popper" 
                       sideOffset={8}
                     >
-                      <SelectItem value="theory" className="text-base font-medium py-2 px-4 rounded-lg cursor-pointer text-foreground hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none transition-colors duration-200 data-[state=checked]:bg-slate-100 dark:data-[state=checked]:bg-slate-800">Theory (Max 40)</SelectItem>
-                      <SelectItem value="integrated" className="text-base font-medium py-2 px-4 rounded-lg cursor-pointer text-foreground hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none transition-colors duration-200 data-[state=checked]:bg-slate-100 dark:data-[state=checked]:bg-slate-800">Integrated (Max 50)</SelectItem>
+                      <SelectItem value="theory" className="text-base font-medium py-2 px-4 rounded-lg cursor-pointer focus:outline-none">Theory (Max 40)</SelectItem>
+                      <SelectItem value="integrated" className="text-base font-medium py-2 px-4 rounded-lg cursor-pointer focus:outline-none">Integrated (Max 50)</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
