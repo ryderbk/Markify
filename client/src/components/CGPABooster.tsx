@@ -8,13 +8,13 @@ import { safeParse } from '@/lib/calculator';
 
 type CompletedSemester = {
   id: string;
-  gpa: number | undefined;
+  gpa: string;
 };
 
 export const CGPABooster = () => {
-  const [targetCGPA, setTargetCGPA] = useState<number | undefined>(undefined);
+  const [targetCGPA, setTargetCGPA] = useState<string>('');
   const [completedSemesters, setCompletedSemesters] = useState<CompletedSemester[]>([
-    { id: '1', gpa: undefined }
+    { id: '1', gpa: '' }
   ]);
   const [remainingSemesters, setRemainingSemesters] = useState<number | undefined>(undefined);
   const [requiredGPA, setRequiredGPA] = useState<string | null>(null);
@@ -22,7 +22,7 @@ export const CGPABooster = () => {
 
   const addSemester = () => {
     if (completedSemesters.length >= 8) return;
-    setCompletedSemesters([...completedSemesters, { id: Date.now().toString(), gpa: undefined }]);
+    setCompletedSemesters([...completedSemesters, { id: Date.now().toString(), gpa: '' }]);
   };
 
   const removeSemester = (id: string) => {
@@ -31,12 +31,13 @@ export const CGPABooster = () => {
     }
   };
 
-  const updateSemester = (id: string, value: any) => {
-    setCompletedSemesters(completedSemesters.map(s => s.id === id ? { ...s, gpa: safeParse(value) } : s));
+  const updateSemester = (id: string, value: string) => {
+    setCompletedSemesters(completedSemesters.map(s => s.id === id ? { ...s, gpa: value } : s));
   };
 
   const calculateRequiredGPA = () => {
-    if (!targetCGPA) return;
+    const parsedTarget = parseFloat(targetCGPA);
+    if (!targetCGPA || isNaN(parsedTarget)) return;
 
     // Formula:
     // Required GPA = (Target CGPA * Total Semesters - Sum of Completed GPAs) / Remaining Semesters
@@ -52,9 +53,9 @@ export const CGPABooster = () => {
     
     const totalSemesters = 8;
     
-    const sumCompletedGPA = completedSemesters.reduce((acc, curr) => acc + (curr.gpa || 0), 0);
+    const sumCompletedGPA = completedSemesters.reduce((acc, curr) => acc + (parseFloat(curr.gpa) || 0), 0);
     
-    const requiredTotalPoints = targetCGPA * totalSemesters;
+    const requiredTotalPoints = parsedTarget * totalSemesters;
     const neededPoints = requiredTotalPoints - sumCompletedGPA;
     
     const reqGPA = neededPoints / numRemaining;
@@ -76,8 +77,8 @@ export const CGPABooster = () => {
   };
 
   const handleReset = () => {
-    setTargetCGPA(undefined);
-    setCompletedSemesters([{ id: '1', gpa: undefined }]);
+    setTargetCGPA('');
+    setCompletedSemesters([{ id: '1', gpa: '' }]);
     setRequiredGPA(null);
     setMessage(null);
   };
@@ -93,8 +94,8 @@ export const CGPABooster = () => {
           <CustomInput 
             label="Target Final CGPA (0-10)" 
             max={10} 
-            value={targetCGPA ?? ''} 
-            onChange={(e) => setTargetCGPA(safeParse(e.target.value))} 
+            value={targetCGPA} 
+            onChange={(e) => setTargetCGPA(e.target.value)} 
           />
         </div>
 
@@ -108,7 +109,7 @@ export const CGPABooster = () => {
                   <CustomInput 
                     label={`Semester ${index + 1} GPA`} 
                     max={10} 
-                    value={sem.gpa ?? ''} 
+                    value={sem.gpa} 
                     onChange={(e) => updateSemester(sem.id, e.target.value)} 
                   />
                 </div>

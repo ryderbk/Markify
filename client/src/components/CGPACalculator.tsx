@@ -20,7 +20,7 @@ export const CGPACalculator = () => {
 
   const addSemester = () => {
     if (semesters.length >= 8) return;
-    setSemesters([...semesters, { id: Date.now().toString(), gpa: undefined, credits: undefined }]);
+    setSemesters([...semesters, { id: Date.now().toString(), gpa: '', credits: '' }]);
   };
 
   const removeSemester = (id: string) => {
