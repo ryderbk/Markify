@@ -8,13 +8,13 @@ import { safeParse } from '@/lib/calculator';
 
 type Semester = {
   id: string;
-  gpa: number | undefined;
-  credits: number | undefined;
+  gpa: string;
+  credits: string;
 };
 
 export const CGPACalculator = () => {
   const [semesters, setSemesters] = useState<Semester[]>([
-    { id: '1', gpa: undefined, credits: undefined }
+    { id: '1', gpa: '', credits: '' }
   ]);
   const [cgpa, setCgpa] = useState<string | null>(null);
 
@@ -29,7 +29,7 @@ export const CGPACalculator = () => {
     }
   };
 
-  const updateSemester = (id: string, field: keyof Semester, value: any) => {
+  const updateSemester = (id: string, field: keyof Semester, value: string) => {
     setSemesters(semesters.map(s => s.id === id ? { ...s, [field]: value } : s));
   };
 
@@ -38,27 +38,16 @@ export const CGPACalculator = () => {
     let totalCredits = 0;
 
     semesters.forEach(s => {
-      const gpa = s.gpa || 0;
-      const credits = s.credits || 0; // Weighted calculation needs credits
+      const gpa = parseFloat(s.gpa) || 0;
+      const credits = parseFloat(s.credits) || 0;
       
-      // If user doesn't enter credits, we can't do weighted accurately. 
-      // Defaulting to 1 would be a simple average if all are 1. 
-      // Let's assume credit is mandatory for accurate calc, or default to 20?
-      // Prompt says "Ask number of semesters... Ask GPA... Output CGPA using standard weighted formula".
-      // Weighted formula = Sum(GPA*Credits)/Sum(Credits).
-      // I added Credits field to be accurate.
-      
-      const c = credits || 20; // Default to 20 if missing? Or treat as 0? 
-      // Let's assume equal weight if credits missing? No, that's dangerous.
-      // Let's just use input values.
-      
-      totalPoints += gpa * (s.credits || 0);
-      totalCredits += (s.credits || 0);
+      totalPoints += gpa * credits;
+      totalCredits += credits;
     });
 
     if (totalCredits === 0) {
       // Fallback to simple average if no credits entered
-      const simpleSum = semesters.reduce((acc, curr) => acc + (curr.gpa || 0), 0);
+      const simpleSum = semesters.reduce((acc, curr) => acc + (parseFloat(curr.gpa) || 0), 0);
       setCgpa((simpleSum / semesters.length).toFixed(2));
     } else {
       setCgpa((totalPoints / totalCredits).toFixed(2));
@@ -66,7 +55,7 @@ export const CGPACalculator = () => {
   };
 
   const handleReset = () => {
-    setSemesters([{ id: '1', gpa: undefined, credits: undefined }]);
+    setSemesters([{ id: '1', gpa: '', credits: '' }]);
     setCgpa(null);
   };
 
@@ -98,15 +87,15 @@ export const CGPACalculator = () => {
                 <CustomInput 
                   label="GPA" 
                   max={10} 
-                  value={sem.gpa ?? ''} 
-                  onChange={(e) => updateSemester(sem.id, 'gpa', safeParse(e.target.value))} 
+                  value={sem.gpa} 
+                  onChange={(e) => updateSemester(sem.id, 'gpa', e.target.value)} 
                 />
                 
                 <CustomInput 
                   label="Credits" 
                   max={30} 
-                  value={sem.credits ?? ''} 
-                  onChange={(e) => updateSemester(sem.id, 'credits', safeParse(e.target.value))} 
+                  value={sem.credits} 
+                  onChange={(e) => updateSemester(sem.id, 'credits', e.target.value)} 
                 />
               </div>
             </motion.div>
